@@ -1,0 +1,37 @@
+#! /bin/bash
+
+# go to current directory
+cd "$(dirname "$0")"
+
+# PRE-CONDITION
+#	https://github.com/julienXX/terminal-notifier -> ONLY MAC 10.9+
+#		install by `brew install terminal-notifier` if your mac has Homebrew installed
+# CREATE_SCRIPT_BY Kamontat Chantrachirathumrong
+
+# To watch background running `ps -T`
+# To kill only 1 task/jobs `kill <PID>` (PID = you can find that in command `ps -T`)
+# To remove all background `pkill -f <FILE_NAME>` (FILE_NAME = file that run background process)
+
+# -------------------------- IMPORT SECTION --------------------------
+
+. ./variable
+
+# -------------------------- FUNCTION SECTION --------------------------
+
+function ctrl_c {
+    echo ""
+	echo "ctrl+c occurred"
+	pkill -f background
+}
+
+# -------------------------- CODE SECTION --------------------------
+
+trap ctrl_c SIGINT
+
+./background
+./foraground
+
+# delete temp file
+rm $VAR_FILE
+
+# ------------------------- END CODE SECTION -------------------------
