@@ -1,0 +1,86 @@
+#! /bin/bash
+
+# go to current directory
+cd "$(dirname "$0")"
+
+# --------------------------- IMPORT SECTION ---------------------------
+
+. ./variable
+
+# -------------------------- VARIABLE SECTION --------------------------
+
+start=$SECONDS
+
+# -------------------------- FUNCTION SECTION --------------------------
+
+function terminal_alert {
+	# notification with timeout, open app when click, change new app icon
+	terminal-notifier -title "$TITLE" -subtitle "$SUB_TITLE" -message "$MESSAGE" -sound default -closeLabel "Close" -timeout "$TIMEOUT_SECOND" -dropdownLabel "New Time" -actions "$(echo "${TIMES_SET[@]}" | tr ' ' ',')" -activate "$APP_OPEN_WHEN_CLICK" -appIcon "$IMAGE_APP" -group 1
+}
+
+function upload_var_file {
+	declare -a array
+	array[0]=$start
+	array[1]=$TIME_LABEL
+	array[2]=$TIMEOUT_SECOND
+	echo ${array[*]} > $VAR_FILE
+}
+
+# result convertion
+function convert_result {
+	if [ "$1" == "$TIMEOUT_REPLY" ]; then
+		echo "[`date`] timeout." >> history.log
+	elif [ "$1" == "$CONTENT_CLICK_REPLY" ]; then
+		echo "[`date`] go to $APP_OPEN_WHEN_CLICK." >> history.log
+	elif [ "$1" == "$CLOSE_CLICK_REPLY" ]; then
+		echo "[`date`] Close." >> history.log
+	else
+		SECOND="$TIME_SECOND"
+		for i in $(seq 0 $[$TIMES_NUMBER - 1]); do
+			if [[ "$1" == "${TIMES_SET[$i]}" ]]; then
+				SECOND="$TIMES_SET_SECOND"
+			fi
+		done
+
+		TEMP_TIME="$TIME_SECOND"
+		TEMP_TIMEOUT="$TIMEOUT_SECOND"
+		
+		TIME_SECOND="$SECOND"
+		TIMEOUT_SECOND=$(( $TIME_SECOND / 2 ))
+
+		TIME_LABEL="$1"
+
+		echo "[`date`] change time from $TEMP_TIME s to $TIME_SECOND s" >> history.log
+		echo "[`date`] change timeout from $TEMP_TIMEOUT s to $TIMEOUT_SECOND s" >> history.log
+	fi
+}
+
+function update {
+	TITLE="Alert!! $TIME_LABEL"
+	SUB_TITLE="please commit the project code."
+	MESSAGE="this alert will disappear after $TIMEOUT_SECOND second(s)."
+}
+
+function timer {
+	while true; do
+		start=$SECONDS
+		upload_var_file
+		
+		if [ $start -ge $TIME_SECOND ]; then
+			# update label
+			update
+			# get alert result
+			result=$(terminal_alert)
+			convert_result $result
+			# restart timer
+			SECONDS=0
+		fi
+	done
+}
+
+# -------------------------- CODE SECTION --------------------------
+
+timer &
+
+
+# ------------------------- END CODE SECTION -------------------------

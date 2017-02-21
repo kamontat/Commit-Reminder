@@ -1,0 +1,36 @@
+#! /bin/bash
+
+# go to current directory
+cd "$(dirname "$0")"
+
+# --------------------------- IMPORT SECTION ---------------------------
+
+. ./variable
+
+# -------------------------- FUNCTION SECTION --------------------------
+
+function download_file_var {
+	arr=($(<$VAR_FILE))
+	if [[ ${arr[*]} != "" ]]; then 
+		second=${arr[0]}
+		label=${arr[1]}
+		timeout=${arr[2]}
+	fi
+}
+
+function input {
+	while true; do
+		read -n1 -p "show[s], exit[e] > " doit 
+		case $doit in
+			s|S) echo "" && download_file_var && echo "All time: $second second(s)" && echo "alert timer: $label, alert_timeout: $timeout" ;;
+			e|E) echo "" && pkill -f background && break ;;
+			*) echo "no command" ;; 
+		esac
+	done
+}
+
+# -------------------------- CODE SECTION --------------------------
+
+input
+
+# ------------------------- END CODE SECTION -------------------------
