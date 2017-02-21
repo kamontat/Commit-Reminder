@@ -1,0 +1,29 @@
+#! /bin/bash
+
+# go to current directory
+cd "$(dirname "$0")"
+
+# -------------------------- VARIABLE SECTION --------------------------
+
+TIMEOUT_REPLY="@TIMEOUT"
+CONTENT_CLICK_REPLY="@CONTENTCLICKED"
+CLOSE_CLICK_REPLY="@ACTIONCLICKED"
+
+VAR_FILE="temp_var_file.data"
+
+TIMES_NUMBER=4
+TIMES_SET=("10-Minutes" "30-Minutes" "1-Hours" "2-Hours")
+TIMES_SET_SECOND=("$((10 * 60))" "$((30 * 60))" "$((60 * 60))" "$((2 * 60 * 60))")
+
+TIME_SECOND=10
+TIME_LABEL="10-second(s)"
+TIMEOUT_SECOND=$[$TIME_SECOND / 2]
+
+TITLE="Alert!! $TIME_LABEL"
+SUB_TITLE="please commit the project code."
+MESSAGE="this alert will disappear after $TIMEOUT_SECOND second(s)."
+
+APP_OPEN_WHEN_CLICK="com.googlecode.iterm2"
+IMAGE_APP="./git_logo.png"
+
+# -------------------------- END VARIABLE SECTION --------------------------
