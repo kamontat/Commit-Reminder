@@ -2,7 +2,8 @@
 for mac user ONLY (Recommend 10.9+)
 
 # Precondition (Learn more [install precondition](#install-precondition-on-develop)
-!. Runable in **Mac User** with **OS 10.9+** **ONLY**  
+!. Runable in **Mac User** with **OS 10.9+** **ONLY**
+
 1. [Homebrew](https://github.com/Homebrew/homebrew)
 2. [Terminal-Notifier](https://github.com/julienXX/terminal-notifier)
 
