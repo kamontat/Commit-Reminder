@@ -14,7 +14,7 @@ cd "$(dirname "$0")"
 
 # -------------------------- IMPORT SECTION --------------------------
 
-. ./variable
+. ./variable/config_var
 
 # -------------------------- FUNCTION SECTION --------------------------
 
