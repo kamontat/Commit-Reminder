@@ -25,18 +25,28 @@ function ctrl_c {
 	pkill -f background
 }
 
+function clean_temp_file {
+	rm -f $VAR_FILE
+	rm -f $HOMEBREW_RUBY_FILE
+}
+
 # -------------------------- CODE SECTION --------------------------
 
 # Exception if user exit program by ctrl+c/command+c
 trap ctrl_c SIGINT
 
-./install_precondition
+# check first params
+if [ "${1:-}" ]; then 
+	echo "have params"
+else 
+	echo "no params"
+fi
 
-./background
-./foraground
+./script/installation
 
-# delete temp file
-rm -f $VAR_FILE
-rm -f $HOMEBREW_RUBY_FILE
+./script/background
+./script/foraground
+
+clean_temp_file
 
 # ------------------------- END CODE SECTION -------------------------
