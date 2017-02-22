@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# --------------------------- IMPORT SECTION ---------------------------
+
+. ./variable
+
+# -------------------------- VARIABLE SECTION --------------------------
+
+HOMEBREW="brew"
+HOMEBREW_URL=$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install > $HOMEBREW_RUBY_FILE)
+HOMEBREW_INSTALL_COMMAND="/usr/bin/ruby $HOMEBREW_RUBY_FILE"
+
+TERMINAL_NOTIFIER="terminal-notifier"
+TERMINAL_NOTIFIER_INSTALL_COMMAND="brew terminal-notifier"
+
+# -------------------------- FUNCTION SECTION --------------------------
+
+function is_exist {
+  	if ! local r="$(type -p "$1")" || [ -z "$r" ]; then
+    	echo $FALSE
+  	else 
+    	echo $TRUE
+  	fi
+}
+
+function check_install {
+  	if [ "$(is_exist "$1")" == $FALSE ]; then
+		echo "$1 not exist!"
+    	echo "try to installed."
+    	$2
+	else
+		echo "$1 exist!"
+  	fi
+}
+
+# -------------------------- CODE SECTION --------------------------
+
+check_install "$HOMEBREW" "$HOMEBREW_INSTALL_COMMAND"
+check_install "$TERMINAL_NOTIFIER" "$TERMINAL_NOTIFIER_INSTALL_COMMAND"
+
+rm -f $HOMEBREW_RUBY_FILE
+
+# ------------------------- END CODE SECTION -------------------------
