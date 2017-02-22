@@ -1,0 +1,24 @@
+# English (UK)
+EN_UK_DAN="Daniel"
+EN_UK_KAT="Kate"
+EN_UK_OLI="Oliver"
+EN_UK_SER="Serena"
+# English (US-Male)
+EN_US_M_ALE="Alex"
+EN_US_M_BRU="Bruce"
+EN_US_M_FRE="Fred"
+EN_US_M_JUN="Junior"
+EN_US_M_RAL="Ralph"
+EN_US_M_TOM="Tom"
+# English (US-Female)
+EN_US_F_AGN="Agnes"
+EN_US_F_ALL="Allison"
+EN_US_F_AVA="Ava"
+EN_US_F_KAT="Kathy"
+EN_US_F_PRI="Princess"
+EN_US_F_SAM="Samantha"
+EN_US_F_SUS="Susan"
+EN_US_F_VIC="Vicki"
+EN_US_F_VICT="Victoria"
+# Thai
+TH="Kanya"
