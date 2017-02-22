@@ -30,17 +30,27 @@ function clean_temp_file {
 	rm -f $HOMEBREW_RUBY_FILE
 }
 
+function is_number {
+	format='^[0-9]+$'
+	if ! [[ $1 =~ $format ]] ; then
+		echo $FALSE
+	else 
+		echo $TRUE
+	fi
+}
+
+function is_param {
+	if [ "${1:-}" ]; then 
+		echo $TRUE
+	else 
+		echo $FALSE
+	fi
+}
+
 # -------------------------- CODE SECTION --------------------------
 
 # Exception if user exit program by ctrl+c/command+c
 trap ctrl_c SIGINT
-
-# check first params
-if [ "${1:-}" ]; then 
-	echo "have params"
-else 
-	echo "no params"
-fi
 
 ./script/installation
 
