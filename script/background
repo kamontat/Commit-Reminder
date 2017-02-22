@@ -3,6 +3,7 @@
 # --------------------------- IMPORT SECTION ---------------------------
 
 . ./variable/config_var
+. ./variable/constant_var
 
 # -------------------------- VARIABLE SECTION --------------------------
 
@@ -12,7 +13,7 @@ start=$SECONDS
 
 function terminal_alert {
 	# notification with timeout, open app when click, change new app icon
-	terminal-notifier -title "$TITLE" -subtitle "$SUB_TITLE" -message "$MESSAGE" -sound default -closeLabel "$CLOSE_CLICK_REPLY" -timeout "$TIMEOUT_SECOND" -dropdownLabel "New Time" -actions "$(echo "${TIMES_SET[@]}" | tr ' ' ',')" -activate "$APP_OPEN_WHEN_CLICK" -appIcon "$IMAGE_APP" -group 1
+	terminal-notifier -title "$TITLE" -subtitle "$SUB_TITLE" -message "$MESSAGE" -sound default -closeLabel "$CLOSE_CLICK_REPLY" -timeout "$TIMEOUT_SECOND" -dropdownLabel "New Time" -actions "$(echo "${TIMES_SET[@]}" | tr ' ' ',')" -activate "$APP_OPEN_WHEN_CLICK" -appIcon "$APP_IMAGE_FILE" -group 1
 }
 
 function upload_var_file {
@@ -39,16 +40,15 @@ function convert_result {
 			fi
 		done
 
-		TEMP_TIME="$TIME_SECOND"
-		TEMP_TIMEOUT="$TIMEOUT_SECOND"
-		TEMP_LABEL="$TIME_LABEL"
-		
+		temp_label="$TIME_LABEL"
+		temp_timeout="$TIMEOUT_SECOND"
+
 		TIME_SECOND="$SECOND"
 		TIMEOUT_SECOND=$(( $TIME_SECOND / 2 ))
 
 		TIME_LABEL="$1"
 
-		echo "[`date`]: Time ($TEMP_LABEL -> $TIME_LABEL), Timeout ($TEMP_TIMEOUT s -> $TIMEOUT_SECOND s)" >> $LOG_FILE
+		echo "[`date`]: Time ($temp_label -> $TIME_LABEL), Timeout ($temp_timeout s -> $TIMEOUT_SECOND s)" >> $LOG_FILE
 	fi
 }
 

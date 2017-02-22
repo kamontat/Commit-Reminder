@@ -2,16 +2,15 @@
 
 # --------------------------- IMPORT SECTION ---------------------------
 
-. ./variable/config_var
+. ./variable/constant_var
 
 # -------------------------- VARIABLE SECTION --------------------------
 
-HOMEBREW="brew"
-HOMEBREW_URL=$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install > $HOMEBREW_RUBY_FILE)
-HOMEBREW_INSTALL_COMMAND="/usr/bin/ruby $HOMEBREW_RUBY_FILE"
+homebrew="brew"
+homebrew_install_command="/usr/bin/ruby $HOMEBREW_RUBY_FILE"
 
-TERMINAL_NOTIFIER="terminal-notifier"
-TERMINAL_NOTIFIER_INSTALL_COMMAND="brew terminal-notifier"
+terminal_notifier="terminal-notifier"
+terminal_notifier_install_command="brew terminal-notifier"
 
 # -------------------------- FUNCTION SECTION --------------------------
 
@@ -33,10 +32,16 @@ function check_install {
   	fi
 }
 
+function load_homebrew_rb {
+	curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install > $HOMEBREW_RUBY_FILE
+}
+
 # -------------------------- CODE SECTION --------------------------
 
-check_install "$HOMEBREW" "$HOMEBREW_INSTALL_COMMAND"
-check_install "$TERMINAL_NOTIFIER" "$TERMINAL_NOTIFIER_INSTALL_COMMAND"
+load_homebrew_rb
+
+check_install "$homebrew" "$homebrew_install_command"
+check_install "$terminal_notifier" "$terminal_notifier_install_command"
 
 rm -f $HOMEBREW_RUBY_FILE
 

@@ -14,14 +14,14 @@ cd "$(dirname "$0")"
 
 # -------------------------- IMPORT SECTION --------------------------
 
-. ./variable/config_var
+. ./variable/constant_var
 
 # -------------------------- FUNCTION SECTION --------------------------
 
 # exit bg job
 function ctrl_c {
     echo ""
-	echo "ctrl+c occurred"
+	echo "(ctrl+c) || (cmd+c) Occurred"
 	pkill -f background
 }
 

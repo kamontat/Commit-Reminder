@@ -2,7 +2,7 @@
 
 # --------------------------- IMPORT SECTION ---------------------------
 
-. ./variable/config_var
+. ./variable/constant_var
 
 # -------------------------- FUNCTION SECTION --------------------------
 

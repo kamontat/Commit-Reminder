@@ -1,0 +1,17 @@
+#! /bin/bash
+
+# -------------------------- VARIABLE SECTION --------------------------
+
+TRUE=1
+FALSE=0
+
+TIMEOUT_REPLY="@TIMEOUT"
+CONTENT_CLICK_REPLY="@CONTENTCLICKED"
+CLOSE_CLICK_REPLY="Close"
+
+VAR_FILE="./temp/temp_var_file.data"
+LOG_FILE="./log/history.log"
+HOMEBREW_RUBY_FILE="./temp/homebrew.rb"
+APP_IMAGE_FILE="./resource/git_logo.png"
+
+# -------------------------- END VARIABLE SECTION --------------------------
