@@ -1,8 +1,5 @@
 #! /bin/bash
 
-# go to current directory
-cd "$(dirname "$0")"
-
 # --------------------------- IMPORT SECTION ---------------------------
 
 . ./variable
@@ -18,13 +15,29 @@ function download_file_var {
 	fi
 }
 
+function show {
+	echo ""
+	download_file_var
+	echo "Current time: $second second(s), All time: $SECONDS"
+	echo "Alert timer: $label, Alert_timeout: $timeout"
+}
+
+function exit {
+	echo ""
+	pkill -f background
+}
+
+function no_command {
+	echo "no command"
+}
+
 function input {
 	while true; do
 		read -n1 -p "show[s], exit[e] > " doit 
 		case $doit in
-			s|S) echo "" && download_file_var && echo "All time: $second second(s)" && echo "alert timer: $label, alert_timeout: $timeout" ;;
-			e|E) echo "" && pkill -f background && break ;;
-			*) echo "no command" ;; 
+			s|S) show ;;
+			e|E) exit && break ;;
+			*) no_command ;; 
 		esac
 	done
 }
