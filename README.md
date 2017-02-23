@@ -1,6 +1,9 @@
 # Commit-Reminder
 for mac user ONLY (Recommend 10.9+)
 
+# Known Bug
+- you must create folder call `temp` before run the main file
+
 # Precondition (Learn more [install precondition](#install-precondition-on-develop)
 !. Runable in **Mac User** with **OS 10.9+** **ONLY**
 
